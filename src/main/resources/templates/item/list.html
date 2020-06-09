@@ -1,42 +1,59 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8"/>
-    <title>List</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+    <title>Alert | Home</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
 </head>
-<body class="container">
-<br/>
-<h1>一覧</h1>
-<br/><br/>
-<p>指定された日にメッセージを Email 送信する。</p>
-<div class="with:80%">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Message</th>
-            <th>Date</th>
-            <th>Email</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr  th:each="item : ${items}">
-            <td th:text="${item.message}">neo</td>
-            <td th:text="${item.date}">Otto</td>
-            <td th:text="${item.email}">6</td>
-            <td><a th:href="@{/toEdit(id=${item.id})}">edit</a></td>
-            <td><a th:href="@{/delete(id=${item.id})}">delete</a></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-<div class="form-group">
-    <div class="col-sm-2 control-label">
-        <a href="/toAdd" th:href="@{/toAdd}" class="btn btn-info">add</a>
-    </div>
-</div>
+<body>
+<nav class="ui inverted attached segment">
+	<div class="ui container">
+		<div class="ui inverted secondary menu">
+			<h2 class="ui teal header item">Alert</h2>
+			<div class="right item">
+				<div sec:authorize="isAuthenticated()">
+					<a href="user" class="item"><i class="user icon"></i><span sec:authentication="name"></span></a>
+				</div>
+				<div sec:authorize="isAuthenticated()">
+					<a href="#" th:href="@{/logout}" class="item"><i class="sign out icon"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
 
+
+<div  class="ui text container">
+<br/>
+<br>
+<div>
+	<h2>All items</h2>
+	
+
+	<div class="ui middle aligned divided list">
+	  <div class="item" th:each="item : ${items}">
+	    <div class="right floated content">
+	    	<span th:if="${item.user} == ${name}">	    	
+				<a th:href="@{/toEdit(id=${item.id})}"><i class="edit icon"></i></a>
+            	<a th:href="@{/delete(id=${item.id})}"><i class="trash icon"></i></a>
+	    	</span>
+	    		<i class="user icon"></i><span th:text="${item.user}"></span>
+   	    </div>
+	    <i class="teal circle icon"></i>
+	    <div class="content">
+	    	<div class="header" th:text="${item.message}"></div>
+				<span class="ui teal basic label">
+					<i class="bell outline icon"></i><span th:text="${item.date}"></span>
+				</span>
+				<span class="ui teal basic label" th:if="${item.repeat}" >
+					<span th:text="${list[item.repeat]}"></span>
+				</span>
+			</div>
+	  </div>
+	</div>
+	
+	<a href="/toAdd" th:href="@{/toAdd}" class="ui teal button">add</a>
+</div>
+</div>
 </body>
 </html>

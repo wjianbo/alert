@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=divice-width, initial-scale=1.0">
+	<title>Alert | Login</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+</head>
+<body>
+	<br>
+	<br>
+	<br>
+	<div class="ui container" style="max-width: 30em !important">
+	<div class="ui success message" th:if="${message}">
+	  <div class="header">
+	    Your user registration was successful.
+	  </div>
+	  <p>You may now log-in with the username you have chosen</p>
+	</div>
+		<div class="ui middle aligned center aligned grid">
+		  <div class="column">
+		    <h2 class="ui teal image header">
+		        Log-in to your account
+		    </h2>
+		    <form class="ui large form" method="post" th:action="@{/login}">
+		      <div class="ui stacked segment">
+		        <div class="field">
+		          <div class="ui left icon input">
+		            <i class="user icon"></i>
+		            <input type="text" name="username" placeholder="Username">
+		          </div>
+		        </div>
+		        <div class="field">
+		          <div class="ui left icon input">
+		            <i class="lock icon"></i>
+		            <input type="password" name="password" placeholder="Password">
+		          </div>
+		        </div>
+
+		        <button class="ui fluid large teal submit button" type="submit">Login</button>
+		      </div>
+		      <div class="ui mini negative message" th:if="${param.error}">
+		      	<ul class="list">
+		      		<li>Invalid username and password.</li>
+		      	</ul>
+		      </div>
+		      <div class="ui error mini message"></div>
+		    </form>
+		
+		      New to us? <a href="signup">Sign Up</a>
+		    </div>
+		  </div>
+		</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script>
+
+
+$('.ui.form')
+.form({
+  fields: {
+    username : 'empty',
+    password : 'empty',
+  }
+})
+;
+</script>
+</body>
+</html>
