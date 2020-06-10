@@ -1,7 +1,7 @@
 # Notes
 
 ## 2020-06-10
-[*] 解决过去日期不能自动重复的问题
+-[x] 解决过去日期不能自动重复的问题
 
 知识点：Convert sql.date to LocalDate
 
