@@ -12,6 +12,7 @@
 	<br>
 	<div class="ui container" style="max-width: 30em !important">
 	<div class="ui success message" th:if="${message}">
+	  <i class="close icon"></i>
 	  <div class="header">
 	    Your user registration was successful.
 	  </div>
@@ -64,6 +65,15 @@ $('.ui.form')
     username : 'empty',
     password : 'empty',
   }
+})
+;
+
+$('.message .close')
+.on('click', function() {
+  $(this)
+    .closest('.message')
+    .transition('fade')
+  ;
 })
 ;
 </script>

@@ -32,11 +32,20 @@ public class RouterController {
 		return "user/signup";
 	}
 	
+	@RequestMapping("user")
+	public String user() {
+		return "user/user";
+	}
+	
+	@RequestMapping("updateUserInfo")
+	public String updateUserInfo(User user) {
+		return "redirect:/user";
+	}
+	
     @RequestMapping("/addUser")
     public String add(RedirectAttributes attributes, User user, Model model) {
     	
     	if (userRepository.findByName(user.getName()).size() > 0) {
-    		System.out.println(userRepository.findByName(user.getName()).get(0).toString());
     		attributes.addFlashAttribute("message", "Username already exists. Please try a different one.");
     		return "redirect:/signup";
     	} else if (userRepository.findByEmail(user.getEmail()).size() > 0) {

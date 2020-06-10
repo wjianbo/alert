@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Alert | Edit</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+</head>
+<body>
+<nav class="ui inverted attached segment m-padded-tb-mini">
+	<div class="ui container">
+		<div class="ui inverted secondary menu">
+			<h2 class="ui teal header item">Alert</h2>
+			<div class="right item">
+				<div sec:authorize="isAuthenticated()">
+					<a href="user" class="item"><i class="user icon"></i><span sec:authentication="name"></span></a>
+				</div>
+				<div sec:authorize="isAuthenticated()">
+					<a href="#" th:href="@{/logout}" class="item"><i class="sign out icon"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
+<div  class="ui text container">
+
+<br/>
+<h2>Edit</h2>
+<div class="with:80%">
+    <form class="ui form" th:action="@{/edit}" th:object="${item}"  method="post">
+        <input type="hidden" name="id" th:value="*{id}" />
+        <input type="hidden" name="user" th:value="*{user}" />
+        <div class="field">
+            <label>Message</label>
+            <input type="text" name="message"  id="message" th:value="*{message}" placeholder="This message will be sent to your email on the date you select below"/>
+        </div>
+        <div class="field">
+            <label>Date</label>
+            <input type="date" class="form-control" name="date" id="date" th:value="*{date}"/>
+        </div>
+        <div class="field">
+            <label>Repeat</label>
+			<select class="form-control" name="repeat">
+			    <option th:each="list:${list}" th:value="${list.key}" th:text="${list.value}" th:selected="(${list.key}==*{repeat})"></option>
+			</select>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+		        <input type="submit" value="Submit" class="ui teal button" />
+                &nbsp; &nbsp; &nbsp;
+                <a href="/toAdd" th:href="@{/list}" class="ui button">Back</a>
+            </div>
+
+        </div>
+    </form>
+</div>
+</div>
+
+</body>
+</html>

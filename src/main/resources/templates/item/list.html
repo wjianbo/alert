@@ -53,7 +53,33 @@
 	</div>
 	
 	<a href="/toAdd" th:href="@{/toAdd}" class="ui teal button">add</a>
+
+	<div class="ui info mini message">
+	  <i class="close icon"></i>
+	  <div class="header">
+	    説明：
+	  </div>
+	  <ul class="list">
+		<li>指定された日の朝８時に Email でアラートのメッセージを送信します。</li>
+		<li>送信後、繰り返しがかかっていないメッセージは自動的にデータベースから削除されます。</li>
+		<li>繰り返しのかかっているメッセージは次の予定日に設定されます。</li>
+	  </ul>
+	</div>
+
 </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script type="text/javascript">
+$('.message .close')
+.on('click', function() {
+  $(this)
+    .closest('.message')
+    .transition('fade')
+  ;
+})
+;
+</script>
 </body>
 </html>
